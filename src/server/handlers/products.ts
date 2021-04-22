@@ -3,20 +3,64 @@ import { Request, Response } from 'express';
 import Commerce from '@chec/commerce.js';
 
 async function getAllProducts(request: Request, response: Response) {
+  const { page: pageNumber } = request.query;
+  const ITEMS_PER_PAGE: number = 15;
+
   try {
     const commerce: any = new Commerce(process.env.COMMERCEJS_API_KEY);
-    const products = await commerce.products.list();
-    response.json(products);
+    const products = await commerce.products.list({ limit: 200 });
+    const TOTAL_ITEMS: number = products.meta.pagination.total;
+
+    //subtract 1 from the page number so page 1 will result in slicing from index 0
+    let startIndex: number = ITEMS_PER_PAGE * (Number(pageNumber) - 1);
+
+    //returns the items from the last page if page number was greater than the last page
+    if (startIndex >= TOTAL_ITEMS) {
+      startIndex = TOTAL_ITEMS - ITEMS_PER_PAGE - 1;
+    }
+
+    const result = {
+      items: [{}],
+      meta: {},
+    };
+
+    result.meta = {
+      lastPage: getLastPageNumber(TOTAL_ITEMS, ITEMS_PER_PAGE),
+    };
+
+    result.items = products.data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+    response.json({ result });
   } catch (err) {
     response.status(400).json({ msg: 'Error fetching product list' });
   }
 }
 
 async function getProduct(request: Request, response: Response) {
-  //
+  const { permaLink } = request.params;
+
+  try {
+    const commerce: any = new Commerce(process.env.COMMERCEJS_API_KEY);
+    const product = await commerce.products.retrieve(permaLink, {
+      type: 'permalink',
+    });
+
+    response.json(product);
+  } catch (error) {
+    response.status(400).json({ msg: 'Error fetching product.' });
+  }
 }
 
 export default {
   getAllProducts,
   getProduct,
 };
+
+function getLastPageNumber(totalItems: number, itemsPerPage: number): number {
+  let num: number = totalItems / itemsPerPage;
+  if (num % 1 === 0) {
+    return num;
+  }
+
+  return num - (num % 1) + 1;
+}
