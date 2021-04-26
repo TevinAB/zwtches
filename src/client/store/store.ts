@@ -1,11 +1,11 @@
-import { Subscriber } from '../types';
+import { Subscriber, State } from '../types';
 
 class Store {
   private subscribers: Array<Subscriber>;
 
-  private state: {};
+  private state: State;
 
-  constructor(initialState: {}) {
+  constructor(initialState: State) {
     this.subscribers = [];
     this.state = initialState;
   }
@@ -19,14 +19,19 @@ class Store {
     };
   }
 
-  updateState(callback: (currentState: object) => object): void {
+  updateState(callback: (currentState: State) => object): void {
     this.state = Object.assign({}, this.state, callback(this.state));
 
     this.subscribers.forEach((subscriber) => subscriber.update(this.state));
   }
 
-  getState() {
+  getState(): State {
     return this.state;
+  }
+
+  //used in tests
+  getSubscriberCount(): number {
+    return this.subscribers.length;
   }
 }
 

@@ -26,3 +26,17 @@ export interface Component {
    */
   remove(): void;
 }
+
+export interface CartItem {
+  name: string;
+  quantity: number;
+  id: string;
+  //price for a single item
+  pricePerUnit: number;
+  image: string;
+}
+
+//The global state must implement this interface
+export interface State {
+  shoppingCart: Array<CartItem>;
+}

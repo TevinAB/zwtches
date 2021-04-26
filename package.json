@@ -8,7 +8,7 @@
     "server": "nodemon --exec node --loader ts-node/esm -r dotenv/config src/server/index.ts",
     "client": "webpack serve --config ./config/webpack.dev.js",
     "start": "node --loader ts-node/esm -r dotenv/config src/server/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --config config/jest.config.js"
   },
   "repository": {
     "type": "git",
