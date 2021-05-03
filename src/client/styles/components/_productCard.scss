@@ -1,0 +1,29 @@
+.product-card {
+  width: 211px;
+  display: inline-block;
+  padding: 0 8px;
+
+  &__img {
+    display: block;
+    width: calc(200px - 16px);
+    height: 200px;
+    object-fit: contain;
+  }
+
+  &__title {
+    @include line-clamp(2);
+    margin: $space-small 0;
+
+    a {
+      color: $font-color-primary;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: $space-small;
+  }
+}
