@@ -1,0 +1,18 @@
+@mixin button {
+  border: 2px solid;
+  border-radius: 0.4375em;
+  padding: 0.25em 0.3125em;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+
+.btn-remove {
+  @include button;
+  color: $font-color-primary;
+  background-color: $font-color-secondary;
+  border-color: $font-color-primary;
+
+  &:hover {
+    background-color: scale-color($font-color-secondary, $lightness: -12%);
+  }
+}

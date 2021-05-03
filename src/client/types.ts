@@ -1,30 +1,41 @@
+export type StoreEvents =
+  | 'ADD_ITEM'
+  | 'REMOVE_ITEM'
+  | 'ITEM_QTY_CHANGE'
+  | 'GET_PRODUCTS';
+
 //Objects subscribing to the store must implement this interface.
 export interface Subscriber {
   /**
    * To be called after the Store's state was updated.
    * @param state - the new state.
    */
-  update(state: object): void;
+  update(state: State): void;
 }
 
 //All components must implement this interface
-export interface Component {
-  shouldComponentUpdate: boolean;
+export interface View {
+  shouldComponentUpdate?: boolean;
 
   /**
    * To be called for the initial rendering of a component.
    */
-  render(selector: string): void;
+  render(): HTMLElement;
 
   /**
-   * Used to remove all its child components from the dom and their     clean up their listeners.
+   * To be called after the render method - used to set event listeners.
    */
-  clear(): void;
+  afterRender(): void;
+
+  /**
+   * Used to remove all its child components from the dom and clean up their listeners.
+   */
+  clearChildren(): void;
 
   /**
    * Used to remove the component from the dom. Clear should be called inside of this method.
    */
-  remove(): void;
+  removeSelf(): void;
 }
 
 export interface CartItem {
@@ -34,9 +45,12 @@ export interface CartItem {
   //price for a single item
   pricePerUnit: number;
   image: string;
+  permaLink?: string;
 }
 
 //The global state must implement this interface
 export interface State {
   shoppingCart: Array<CartItem>;
+  //current page for the product catalog list
+  currentPage: number;
 }

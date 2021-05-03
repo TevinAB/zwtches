@@ -17,10 +17,16 @@ module.exports = {
     port: 3000,
     hot: true,
   },
+  resolve: {
+    extensions: ['.ts', '...'],
+    alias: {
+      '@': path.resolve(__dirname, '../src/client/'),
+    },
+  },
   module: {
     rules: [
       {
-        test: '/.s[ac]ss$/i',
+        test: /\.(scss|css)$/i,
         use: [
           'style-loader',
           {
@@ -38,9 +44,9 @@ module.exports = {
         ],
       },
       {
-        test: '/.ts$/',
+        test: /\.ts$/,
         use: [{ loader: 'ts-loader' }],
-        exclude: '/node_modules/',
+        exclude: /node_modules/,
       },
     ],
   },

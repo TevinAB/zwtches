@@ -1,0 +1,39 @@
+:root {
+  font-size: 1rem;
+
+  @media screen and(max-width:$screen-med) {
+    font-size: 0.875rem;
+  }
+
+  @media screen and(max-width:$screen-small) {
+    font-size: 0.75rem;
+  }
+}
+
+body {
+  font-family: $font-stack;
+}
+
+.font-sm {
+  font-size: 0.75rem;
+}
+
+.font-med {
+  font-size: 1rem;
+}
+
+.font-lg {
+  font-size: 1.125rem;
+}
+
+.font-thin {
+  font-weight: 300;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.font-bold {
+  font-weight: 700;
+}

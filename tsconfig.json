@@ -8,11 +8,15 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
-    "outDir": "dist",
+    "outDir": "./dist",
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "allowJs": true
+    "allowJs": true,
+    "lib":["DOM"],
+    "paths": {
+      "@/*": ["./src/client/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules","dist/"]
