@@ -8,12 +8,11 @@ class TestObj implements Subscriber {
 describe('Tests for the Store object', () => {
   let subscriber: TestObj;
   let store: Store;
-  let state: State;
+  let state: {};
   const TEST_ID = 'apl12';
 
   beforeEach(() => {
     subscriber = new TestObj();
-    store = new Store(state);
     state = {
       shoppingCart: [
         {
@@ -32,6 +31,7 @@ describe('Tests for the Store object', () => {
         },
       ],
     };
+    store = new Store(state as State);
   });
 
   it('should accept subscribers', () => {
