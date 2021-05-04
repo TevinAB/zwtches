@@ -17,3 +17,9 @@
 .hidden {
   display: none;
 }
+
+.skip-to-main:focus {
+  width: auto;
+  height: auto;
+  background-color: $font-color-secondary;
+}

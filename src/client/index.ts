@@ -2,7 +2,7 @@ import './styles/main.scss';
 import Store from '@/store/store';
 import { State } from '@/types';
 
-import productCard from '@/components/productCard/productCard';
+import navBar from '@/components/navBar/navBar';
 
 (function (window: Window) {
   const initialState: State = {
@@ -12,5 +12,8 @@ import productCard from '@/components/productCard/productCard';
   const STORE = new Store(initialState);
   (window as any).STORE = STORE;
 
-  let main = document.getElementById('app');
+  let header = document.getElementById('header');
+  if (header) header.innerHTML = navBar();
+
+  let main = document.getElementById('root');
 })(window);
