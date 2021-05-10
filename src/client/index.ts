@@ -3,6 +3,7 @@ import Store from '@/store/store';
 import { State } from '@/types';
 
 import navBar from '@/components/navBar/navBar';
+import pagination from '@/components/pagination/pagination';
 
 (function (window: Window) {
   const initialState: State = {
@@ -15,5 +16,5 @@ import navBar from '@/components/navBar/navBar';
   let header = document.getElementById('header');
   if (header) header.innerHTML = navBar();
 
-  let main = document.getElementById('root');
+  let main = document.getElementById('app');
 })(window);
