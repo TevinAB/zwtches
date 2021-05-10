@@ -13,7 +13,7 @@
   border-color: $font-color-primary;
 
   &:hover {
-    background-color: scale-color($font-color-secondary, $lightness: -12%);
+    background-color: $secondary-color-darken-1;
   }
 }
 
