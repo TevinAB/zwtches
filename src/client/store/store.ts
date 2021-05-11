@@ -1,28 +1,44 @@
-import { Subscriber, State } from '../types';
+import { State, EventTypes } from '@/types';
 
 class Store {
-  private subscribers: Array<Subscriber>;
+  private subscribers: Array<{
+    callBack: (state: State) => void;
+    eventType: EventTypes;
+  }>;
 
   private state: State;
 
   constructor(initialState: State) {
     this.subscribers = [];
     this.state = initialState;
+    //get state from local storage if present
   }
 
-  subscribe(subscriber: Subscriber): () => void {
-    this.subscribers.push(subscriber);
+  subscribe(
+    eventType: EventTypes,
+    callBack: (state: State) => void
+  ): () => void {
+    this.subscribers.push({ callBack, eventType });
 
-    //returns a function that can be used by the subscriber to unsubscribe from the store
+    //returns an unsubscribe function
     return () => {
-      this.subscribers = this.subscribers.filter((subs) => subs !== subscriber);
+      this.subscribers = this.subscribers.filter(
+        (sub) => sub.callBack !== callBack
+      );
     };
   }
 
-  updateState(callback: (currentState: State) => object): void {
-    this.state = Object.assign({}, this.state, callback(this.state));
+  setState(eventType: EventTypes, newState: State): void {
+    //deep clone new state.
+    this.state = JSON.parse(JSON.stringify(newState));
 
-    this.subscribers.forEach((subscriber) => subscriber.update(this.state));
+    this.notify(eventType);
+  }
+
+  private notify(eventType: EventTypes) {
+    this.subscribers.forEach((sub) => {
+      if (sub.eventType === eventType) sub.callBack(this.state);
+    });
   }
 
   getState(): State {
