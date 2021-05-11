@@ -1,17 +1,8 @@
-export type StoreEvents =
+export type EventTypes =
   | 'ADD_ITEM'
   | 'REMOVE_ITEM'
   | 'ITEM_QTY_CHANGE'
   | 'GET_PRODUCTS';
-
-//Objects subscribing to the store must implement this interface.
-export interface Subscriber {
-  /**
-   * To be called after the Store's state was updated.
-   * @param state - the new state.
-   */
-  update(state: State): void;
-}
 
 //All components must implement this interface
 export interface View {
@@ -53,4 +44,7 @@ export interface State {
   shoppingCart: Array<CartItem>;
   //current page for the product catalog list
   currentPage: number;
+
+  //products won't have any real type checking so be aware when using
+  products: Array<{ [key: string]: any }>;
 }

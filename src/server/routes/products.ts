@@ -4,11 +4,11 @@ import { productHandlers } from '../handlers';
 const router = express.Router();
 
 /**
- * @route /api/products/
+ * @route /api/products?page
  * @description Get all products
  * @access Public
  */
-router.get('/', productHandlers.getAllProducts);
+router.get('', productHandlers.getAllProducts);
 
 /**
  * @route /api/products/:permaLink
