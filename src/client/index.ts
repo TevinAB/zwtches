@@ -9,7 +9,6 @@ import pagination from '@/components/pagination/pagination';
   const initialState: State = {
     shoppingCart: [],
     products: [],
-    currentPage: 1,
   };
   const STORE = new Store(initialState);
   (window as any).STORE = STORE;

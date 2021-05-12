@@ -42,8 +42,6 @@ export interface CartItem {
 //The global state must implement this interface
 export interface State {
   shoppingCart: Array<CartItem>;
-  //current page for the product catalog list
-  currentPage: number;
 
   //products won't have any real type checking so be aware when using
   products: Array<{ [key: string]: any }>;
