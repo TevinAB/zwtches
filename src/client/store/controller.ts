@@ -20,6 +20,7 @@ class StoreController {
       (prod) => prod.id === payload.productId
     );
 
+    //no such product
     if (!product) return;
 
     const cartItem: CartItem = {
@@ -28,9 +29,21 @@ class StoreController {
       quantity: 1,
       pricePerUnit: product.price.raw,
       image: product.media.source,
+      permaLink: product.permalink,
     };
+
+    const possibleDuplicate = oldState.shoppingCart.find(
+      (item) => item.id === cartItem.id
+    );
+    if (possibleDuplicate) cartItem.quantity += possibleDuplicate.quantity;
+
+    //filter to prevent item duplication
+    oldState.shoppingCart = oldState.shoppingCart.filter(
+      (item) => item.id !== cartItem.id
+    );
+
     const newState = Object.assign({}, oldState, {
-      shoppingCart: oldState.shoppingCart.push(cartItem),
+      shoppingCart: [...oldState.shoppingCart, cartItem],
     });
 
     this.store.setState('ADD_ITEM', newState);
@@ -55,7 +68,8 @@ class StoreController {
       shoppingCart: oldState.shoppingCart.map((cartItem) => {
         if (cartItem.id !== payload.productId) return cartItem;
 
-        return (cartItem.quantity = payload.newQuantity);
+        cartItem.quantity = payload.newQuantity;
+        return cartItem;
       }),
     });
 
