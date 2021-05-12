@@ -16,6 +16,7 @@ describe('Tests for the Store object', () => {
           id: TEST_ID,
           pricePerUnit: 12.1,
           image: 'path/to/image',
+          permaLink: 'ljsj12',
         },
         {
           name: 'Tv',
@@ -23,6 +24,7 @@ describe('Tests for the Store object', () => {
           id: 'tv-01',
           pricePerUnit: 300.5,
           image: 'path/to/image',
+          permaLink: 'ljsj12q',
         },
       ],
     };

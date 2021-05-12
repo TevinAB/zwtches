@@ -1,4 +1,4 @@
-import { EventTypes, CartItem } from '@/types';
+import { EventTypes, CartItem, State } from '@/types';
 import Store from '@/store/store';
 import axios from 'axios';
 
@@ -9,14 +9,14 @@ class StoreController {
     this.store = store;
   }
 
-  subscribeToStore(eventType: EventTypes, callback: () => void) {
+  subscribeToStore(eventType: EventTypes, callback: (newState: State) => void) {
     //return the unsubscribe function
     return this.store.subscribe(eventType, callback);
   }
 
   addItem(payload: { productId: string }) {
     const oldState = this.store.getState();
-    const product = oldState.products.find(
+    const product = oldState.products.items.find(
       (prod) => prod.id === payload.productId
     );
 
@@ -78,10 +78,16 @@ class StoreController {
 
   async getProducts(payload: { pageNumber: string | number }) {
     const { pageNumber } = payload;
-    const products = await axios.get(`/api/products?page=${pageNumber}`);
+    const response = await axios.get(`/api/products?page=${pageNumber}`);
+    const products = response.data.result.items;
+    //last page for this product catalog
+    const lastPage = response.data.result.meta.lastPage;
+
     const oldState = this.store.getState();
 
-    const newState = Object.assign({}, oldState, { products });
+    const newState = Object.assign({}, oldState, {
+      products: { items: products, lastPage },
+    });
 
     this.store.setState('GET_PRODUCTS', newState);
   }

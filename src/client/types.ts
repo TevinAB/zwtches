@@ -36,13 +36,21 @@ export interface CartItem {
   //price for a single item
   pricePerUnit: number;
   image: string;
-  permaLink?: string;
+  permaLink: string;
 }
 
 //The global state must implement this interface
 export interface State {
   shoppingCart: Array<CartItem>;
 
-  //products won't have any real type checking so be aware when using
-  products: Array<{ [key: string]: any }>;
+  products: {
+    items: Array<{
+      id: string;
+      name: string;
+      price: { raw: number };
+      media: { source: string };
+      permalink: string;
+    }>;
+    lastPage: number;
+  };
 }

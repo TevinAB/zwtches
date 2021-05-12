@@ -9,7 +9,16 @@ describe('Store controller tests', () => {
   let store: Store;
   let state: {
     shoppingCart: Array<CartItem>;
-    products: Array<{ [key: string]: any }>;
+    products: {
+      items: Array<{
+        id: string;
+        name: string;
+        price: { raw: number };
+        media: { source: string };
+        permalink: string;
+      }>;
+      lastPage: number;
+    };
   };
   let controller: Controller;
   let callback: jest.Mock;
@@ -18,22 +27,25 @@ describe('Store controller tests', () => {
   beforeEach(() => {
     state = {
       shoppingCart: [],
-      products: [
-        {
-          name: 'Apple',
-          id: TEST_ID,
-          price: { raw: 12.1 },
-          media: { source: 'path/to/image' },
-          permalink: 'WQaZ6z',
-        },
-        {
-          name: 'Tv',
-          id: 'tv-01',
-          price: { raw: 300.5 },
-          media: { source: 'path/to/image' },
-          permalink: 'WQaZ1z',
-        },
-      ],
+      products: {
+        items: [
+          {
+            name: 'Apple',
+            id: TEST_ID,
+            price: { raw: 12.1 },
+            media: { source: 'path/to/image' },
+            permalink: 'WQaZ6z',
+          },
+          {
+            name: 'Tv',
+            id: 'tv-01',
+            price: { raw: 300.5 },
+            media: { source: 'path/to/image' },
+            permalink: 'WQaZ1z',
+          },
+        ],
+        lastPage: 1,
+      },
     };
     store = new Store(state as State);
     store.setState = jest.fn(store.setState);
@@ -63,7 +75,7 @@ describe('Store controller tests', () => {
 
   it('should be able to add an item to the store', () => {
     controller.addItem({ productId: TEST_ID });
-    const product = state.products.find((prod) => prod.id === TEST_ID);
+    const product = state.products.items[0];
 
     const expectedCartItem: CartItem = {
       name: product?.name,
@@ -114,10 +126,20 @@ describe('Store controller tests', () => {
   });
 
   it('should fetch products and add the results to the store', async () => {
-    axios.get = jest.fn().mockResolvedValueOnce(state.products);
+    const mockedResObj = {
+      data: {
+        result: {
+          items: state.products.items,
+          meta: {
+            lastPage: state.products.lastPage,
+          },
+        },
+      },
+    };
+    axios.get = jest.fn().mockResolvedValueOnce(mockedResObj);
 
     //remove the products before calling get products
-    store.getState().products = [];
+    store.getState().products.items = [];
 
     await controller.getProducts({ pageNumber: 1 });
 
@@ -128,8 +150,8 @@ describe('Store controller tests', () => {
         '/api/products?page=1'
       );
 
-      expect(store.getState().products.length).toBe(2);
-      expect(store.getState().products[0].id).toBe(TEST_ID);
+      expect(store.getState().products.items.length).toBe(2);
+      expect(store.getState().products.items[0].id).toBe(TEST_ID);
       expect((store.setState as jest.Mock).mock.calls.length).toBe(1);
       expect((store.setState as jest.Mock).mock.calls[0][0]).toBe(
         'GET_PRODUCTS'
