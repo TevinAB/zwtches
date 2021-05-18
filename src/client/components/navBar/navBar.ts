@@ -1,7 +1,7 @@
 import { State } from '@/types';
 export default function navBar(cartQuantity: number = 0): string {
   return `
-  <header class="nav">
+  <div class="nav">
     <div class="nav__container">
       <a href="#app" class="skip-to-main visually-hidden">Skip to main content.</a>
       <a class="nav__logo" href="/" data-link aria-labelledby="home-link">Zwtches</a>
@@ -15,7 +15,7 @@ export default function navBar(cartQuantity: number = 0): string {
         <span class="nav__cart-quantity">${cartQuantity}</span>
       </div>
     </div>
-  </header>
+  </div>
   `;
 }
 
