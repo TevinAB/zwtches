@@ -1,3 +1,4 @@
+import { CartItem, State } from '@/types';
 /**
  * @param path
  * @param routerMap
@@ -25,4 +26,21 @@ export function getViewFromUrl(
 
 export function getRouterEventName() {
   return 'reloadrouter';
+}
+
+export function getInitialState(): State {
+  let cart: Array<CartItem> = [];
+
+  if (localStorage.getItem('cart')) {
+    cart = JSON.parse(localStorage.getItem('cart') as '');
+  }
+
+  return {
+    shoppingCart: cart instanceof Array ? cart : [],
+    products: { items: [], lastPage: 1 },
+  };
+}
+
+export function storeCart(cart: Array<CartItem>) {
+  localStorage.setItem('cart', JSON.stringify(cart));
 }

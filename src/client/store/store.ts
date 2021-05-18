@@ -1,4 +1,5 @@
 import { State, EventTypes } from '@/types';
+import { storeCart } from '@/utils/utils';
 
 class Store {
   private subscribers: Array<{
@@ -11,7 +12,6 @@ class Store {
   constructor(initialState: State) {
     this.subscribers = [];
     this.state = initialState;
-    //get state from local storage if present
   }
 
   subscribe(
@@ -31,6 +31,8 @@ class Store {
   setState(eventType: EventTypes, newState: State): void {
     //deep clone new state.
     this.state = JSON.parse(JSON.stringify(newState));
+
+    storeCart(this.state.shoppingCart);
 
     this.notify(eventType);
   }

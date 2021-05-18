@@ -5,7 +5,7 @@ import { State } from '@/types';
 import router from '@/pages/router';
 import navBar, { handleCartQtyChange } from '@/components/navBar/navBar';
 import CatalogPage from '@/pages/catalog/catalog';
-import { getRouterEventName } from './utils/utils';
+import { getRouterEventName, getInitialState } from './utils/utils';
 
 //keys are converted to regex to match pathname
 const routeMap = {
@@ -13,10 +13,7 @@ const routeMap = {
 };
 
 (function (window: Window) {
-  const initialState: State = {
-    shoppingCart: [],
-    products: { items: [], lastPage: 1 },
-  };
+  const initialState: State = getInitialState();
 
   const STORE = new Store(initialState);
   const storeController = new StoreController(STORE);
