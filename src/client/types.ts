@@ -2,16 +2,15 @@ export type EventTypes =
   | 'ADD_ITEM'
   | 'REMOVE_ITEM'
   | 'ITEM_QTY_CHANGE'
-  | 'GET_PRODUCTS';
+  | 'GET_PRODUCTS'
+  | 'GET_PRODUCTS_ERROR';
 
-//All components must implement this interface
+//All pages must implement this interface
 export interface View {
-  shouldComponentUpdate?: boolean;
-
   /**
    * To be called for the initial rendering of a component.
    */
-  render(): HTMLElement;
+  render(): HTMLElement | Promise<HTMLElement>;
 
   /**
    * To be called after the render method - used to set event listeners.
@@ -19,14 +18,9 @@ export interface View {
   afterRender(): void;
 
   /**
-   * Used to remove all its child components from the dom and clean up their listeners.
+   * Called before this view removed from the dom
    */
-  clearChildren(): void;
-
-  /**
-   * Used to remove the component from the dom. Clear should be called inside of this method.
-   */
-  removeSelf(): void;
+  unmount?(): void;
 }
 
 export interface CartItem {
@@ -47,7 +41,7 @@ export interface State {
     items: Array<{
       id: string;
       name: string;
-      price: { raw: number };
+      price: { raw: number; formatted: number };
       media: { source: string };
       permalink: string;
     }>;

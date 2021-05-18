@@ -143,8 +143,8 @@ describe('Store controller tests', () => {
 
     await controller.getProducts({ pageNumber: 1 });
 
-    //ensure its really mocked
     setTimeout(() => {
+      //ensure its really mocked
       expect((axios.get as jest.Mock).mock.calls.length).toBe(1);
       expect((axios.get as jest.Mock).mock.calls[0][0]).toBe(
         '/api/products?page=1'

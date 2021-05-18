@@ -1,12 +1,12 @@
 @mixin button {
-  border: 2px solid;
-  border-radius: 0.4375em;
-  padding: 0.25em 0.3125em;
+  border: $btn-border-size solid;
+  border-radius: $btn-border-radius;
+  padding: $btn-padding;
   cursor: pointer;
   transition: background-color 0.2s ease-in;
 }
 
-.btn-remove {
+.btn-add-to-cart {
   @include button;
   color: $font-color-primary;
   background-color: $font-color-secondary;
@@ -17,7 +17,8 @@
   }
 }
 
-.btn-add-to-cart {
+.btn-remove,
+.btn-reload {
   @include button;
   color: $font-color-secondary;
   background-color: $font-color-primary;

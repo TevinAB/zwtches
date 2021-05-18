@@ -1,0 +1,12 @@
+.catalog {
+  min-height: 100vh;
+  padding-bottom: calc(#{$space-small} + #{$catalog-list-margin});
+
+  .catalog__list {
+    padding: 0;
+    margin: $catalog-list-margin 0;
+    li {
+      display: inline-block;
+    }
+  }
+}
