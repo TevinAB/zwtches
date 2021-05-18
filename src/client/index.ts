@@ -29,7 +29,7 @@ const routeMap = {
   }
 
   //remove soon
-  history.pushState({}, 'catalog', '/catalog?page=1');
+  //history.pushState({}, 'catalog', '/catalog?page=1');
 
   router(storeController, 'app', routeMap);
 
