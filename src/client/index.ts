@@ -28,9 +28,6 @@ const routeMap = {
     storeController.subscribeToStore('REMOVE_ITEM', handleCartQtyChange);
   }
 
-  //remove soon
-  //history.pushState({}, 'catalog', '/catalog?page=1');
-
   router(storeController, 'app', routeMap);
 
   //handles the need for router reload

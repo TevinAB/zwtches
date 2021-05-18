@@ -14,10 +14,8 @@ async function router(
   if (selectedView && selectedView.unmount) selectedView.unmount();
 
   const path = window.location.pathname + window.location.search;
-  console.log(path);
   const viewConstructor = getViewFromUrl(path, routeMap);
 
-  //eventually add the error view in the event no match was found
   selectedView = viewConstructor
     ? new viewConstructor(storeController)
     : new NotFound();
