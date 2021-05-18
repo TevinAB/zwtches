@@ -38,11 +38,11 @@ describe('Product Card component', () => {
   it("should render an anchor as a title using the product's name", () => {
     if (appElement) appElement.innerHTML = cardComponent();
 
-    const title = document.querySelector('a[data-link]');
+    const title = screen.getByText(product.name);
 
     expect(title).not.toBe(null);
     expect(title?.innerHTML).toBe(product.name);
-    expect(title?.getAttribute('href')).toBe(`/products/${product.permaLink}`);
+    expect(title?.getAttribute('href')).toBe(`/product/${product.permaLink}`);
   });
 
   it('should show the price for the product item', () => {
