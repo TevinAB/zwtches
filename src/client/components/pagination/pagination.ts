@@ -127,21 +127,21 @@ function linkBuilder(
     ${isCurrentPage ? 'class= "active-page"' : ''}
     aria-label="Page ${
       isCurrentPage ? pageNum + '. Current.' : pageNum
-    }">${value}</a>`;
+    }" data-link>${value}</a>`;
   }
 
   if (value === 'next') {
     return `<a href=${path.replace(
       matcher,
       'page=' + (currentPage + 1)
-    )} aria-label="Next Page.">${value}</a>`;
+    )} aria-label="Next Page." data-link>${value}</a>`;
   }
 
   if (value === 'prev') {
     return `<a href=${path.replace(
       matcher,
       'page=' + (currentPage - 1)
-    )} aria-label="Prev Page.">${value}</a>`;
+    )} aria-label="Prev Page." data-link>${value}</a>`;
   }
 
   return `<a>${value}</a>`;

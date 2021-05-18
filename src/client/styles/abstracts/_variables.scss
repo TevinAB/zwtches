@@ -4,9 +4,15 @@ $font-color-secondary: white;
 
 $secondary-color-darken-1: scale-color($font-color-secondary, $lightness: -12%);
 
-$container-max-width: 1020px;
+$container-max-width: 85%;
 
 $space-small: 1.3rem;
+$space-med: 2.25rem;
+$catalog-list-margin: 1rem;
+
+$btn-padding: 0.25em 0.3125em;
+$btn-border-size: 2px;
+$btn-border-radius: 0.4375em;
 
 $screen-small: 320px;
 $screen-med: 720px;

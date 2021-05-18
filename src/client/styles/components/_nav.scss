@@ -1,10 +1,15 @@
 .nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: $font-color-primary;
-  padding: 15px 45px;
-  color: $font-color-secondary;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    max-width: $container-max-width;
+    margin: auto;
+    color: $font-color-secondary;
+  }
 
   &__logo {
     color: $font-color-secondary;

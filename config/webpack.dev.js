@@ -9,12 +9,14 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
+    publicPath: '/',
   },
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist',
     open: true,
     port: 3000,
+    historyApiFallback: true,
     hot: true,
     proxy: {
       '/api': 'http://localhost:5000',

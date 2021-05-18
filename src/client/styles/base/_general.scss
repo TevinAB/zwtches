@@ -1,8 +1,10 @@
 .container {
+  text-align: center;
   max-width: $container-max-width;
   width: 100%;
   margin: auto;
   padding: 0 20px;
+  background-color: $font-color-secondary;
 }
 
 .visually-hidden {
@@ -14,8 +16,18 @@
   position: absolute;
 }
 
+.loading-overlay {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.726);
+}
+
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .skip-to-main:focus {

@@ -1,10 +1,11 @@
 @mixin spinner($color, $size, $line_thickness) {
+  display: inline-block;
   width: $size;
   height: $size;
   border-radius: 50%;
   border: $line-thickness solid transparent;
-  border-top: $line-thickness solid scale-color($color, $lightness: 50%);
-  border-bottom: $line-thickness solid scale-color($color, $lightness: 50%);
+  border-top: $line-thickness solid scale-color($color, $lightness: 10%);
+  border-bottom: $line-thickness solid scale-color($color, $lightness: 10%);
   animation: spin 1s infinite linear;
 }
 
