@@ -1,6 +1,7 @@
 import { View } from '@/types';
 import StoreController from '@/store/controller';
 import { getRouterEventName, getViewFromUrl } from '@/utils/utils';
+import NotFound from '@/pages/404/notFound';
 
 //should persist between view changes to allow clean up before recreating new view
 let selectedView: View;
@@ -13,10 +14,13 @@ async function router(
   if (selectedView && selectedView.unmount) selectedView.unmount();
 
   const path = window.location.pathname + window.location.search;
+  console.log(path);
   const viewConstructor = getViewFromUrl(path, routeMap);
 
   //eventually add the error view in the event no match was found
-  selectedView = viewConstructor && new viewConstructor(storeController);
+  selectedView = viewConstructor
+    ? new viewConstructor(storeController)
+    : new NotFound();
 
   const main = document.getElementById(elementId);
 

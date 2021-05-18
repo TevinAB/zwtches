@@ -4,7 +4,7 @@ export default function navBar(cartQuantity: number = 0): string {
   <header class="nav">
     <div class="nav__container">
       <a href="#app" class="skip-to-main visually-hidden">Skip to main content.</a>
-      <a class="nav__logo" href="#" data-link aria-labelledby="home-link">Zwtches</a>
+      <a class="nav__logo" href="/" data-link aria-labelledby="home-link">Zwtches</a>
       <span id="home-link" class="visually-hidden" hidden>Link to home page.</span>
 
       <div class="nav__right-content">
