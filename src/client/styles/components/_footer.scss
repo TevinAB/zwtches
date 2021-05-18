@@ -1,0 +1,11 @@
+.footer {
+  background-color: $font-color-primary;
+  color: $font-color-secondary;
+  padding: 45px;
+  text-align: center;
+
+  i {
+    color: $font-color-secondary;
+    font-size: 24px;
+  }
+}

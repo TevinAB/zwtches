@@ -4,6 +4,7 @@ import StoreController from '@/store/controller';
 import { State } from '@/types';
 import router from '@/pages/router';
 import navBar, { handleCartQtyChange } from '@/components/navBar/navBar';
+import footer from '@/components/footer/footer';
 import CatalogPage from '@/pages/catalog/catalog';
 import { getRouterEventName, getInitialState } from './utils/utils';
 
@@ -28,7 +29,14 @@ const routeMap = {
     storeController.subscribeToStore('REMOVE_ITEM', handleCartQtyChange);
   }
 
+  //main section
   router(storeController, 'app', routeMap);
+
+  //setup footer
+  const footerContainer = document.getElementById('footer');
+  if (footerContainer) {
+    footerContainer.innerHTML = footer();
+  }
 
   //handles the need for router reload
   window.addEventListener(getRouterEventName(), () => {
