@@ -3,12 +3,15 @@ import { Request, Response } from 'express';
 import Commerce from '@chec/commerce.js';
 
 async function getAllProducts(request: Request, response: Response) {
-  const { page: pageNumber } = request.query;
+  const { page: pageNumber, cat: categorySlug } = request.query;
   const ITEMS_PER_PAGE: number = 15;
 
   try {
     const commerce: any = new Commerce(process.env.COMMERCEJS_API_KEY);
-    const products = await commerce.products.list({ limit: 200 });
+    const products = await commerce.products.list({
+      limit: 200,
+      category_slug: [categorySlug],
+    });
     const TOTAL_ITEMS: number = products.meta.pagination.total;
 
     //subtract 1 from the page number so page 1 will result in slicing from index 0
@@ -31,8 +34,8 @@ async function getAllProducts(request: Request, response: Response) {
     result.items = products.data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
     response.json({ result });
-  } catch (err) {
-    response.status(400).json({ msg: 'Error fetching product list' });
+  } catch (error) {
+    response.status(400).json({ error: error.data.error });
   }
 }
 

@@ -4,7 +4,9 @@ import { productHandlers } from '../handlers';
 const router = express.Router();
 
 /**
- * @route /api/products?page
+ * @route /api/products?page&cat
+ * @param page - Page number
+ * @param cat - Category
  * @description Get all products
  * @access Public
  */
