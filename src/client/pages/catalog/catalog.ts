@@ -8,17 +8,17 @@ class Catalog implements View {
   private controller: StoreController;
   private catalogPage: HTMLElement;
   private pageNumber: number;
+  private category: string;
+
   //collection of all unsubscribe function for each subscription made
   private unsubscribe: Array<() => void> = [];
 
-  //accept the current page number
-  constructor(controller: StoreController) {
+  constructor(controller: StoreController, params: URLSearchParams) {
     this.catalogPage = document.createElement('div');
     this.catalogPage.classList.add('catalog');
 
-    this.pageNumber = Number(
-      new URLSearchParams(window.location.search).get('page')
-    );
+    this.pageNumber = Number(params.get('page'));
+    this.category = params.get('cat') || '';
 
     this.controller = controller;
 
@@ -39,7 +39,10 @@ class Catalog implements View {
 
   async render() {
     //get the products for the current page. Store will call our handleGetProducts
-    await this.controller.getProducts({ pageNumber: this.pageNumber });
+    await this.controller.getProducts({
+      pageNumber: this.pageNumber,
+      category: this.category,
+    });
 
     return this.catalogPage;
   }
@@ -74,7 +77,12 @@ class Catalog implements View {
           )
           .join('')}
       </ul>
-      ${pagination(this.pageNumber, state.products.lastPage, '?page', 'page')}
+      ${pagination(
+        this.pageNumber,
+        state.products.lastPage,
+        `?page&cat=${this.category}`,
+        'page'
+      )}
     `;
   }
 

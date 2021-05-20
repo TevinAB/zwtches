@@ -76,11 +76,16 @@ class StoreController {
     this.store.setState('ITEM_QTY_CHANGE', newState);
   }
 
-  async getProducts(payload: { pageNumber: string | number }) {
-    const { pageNumber } = payload;
+  async getProducts(payload: {
+    pageNumber: string | number;
+    category: string;
+  }) {
+    const { pageNumber, category } = payload;
     const oldState = this.store.getState();
     try {
-      const response = await axios.get(`/api/products?page=${pageNumber}`);
+      const response = await axios.get(
+        `/api/products?page=${pageNumber}&cat=${category}`
+      );
       const products = response.data.result.items;
       //last page for this product catalog
       const lastPage = response.data.result.meta.lastPage;

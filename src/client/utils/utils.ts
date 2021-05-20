@@ -28,6 +28,10 @@ export function getRouterEventName() {
   return 'reloadrouter';
 }
 
+export function createProductPath(permalink: string) {
+  return `/product/${permalink}`;
+}
+
 export function getInitialState(): State {
   let cart: Array<CartItem> = [];
 

@@ -16,8 +16,10 @@ async function router(
   const path = window.location.pathname + window.location.search;
   const viewConstructor = getViewFromUrl(path, routeMap);
 
+  const params = new URLSearchParams(window.location.search);
+
   selectedView = viewConstructor
-    ? new viewConstructor(storeController)
+    ? new viewConstructor(storeController, params)
     : new NotFound();
 
   const main = document.getElementById(elementId);

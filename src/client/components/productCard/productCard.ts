@@ -1,4 +1,5 @@
 import { CartItem } from '@/types';
+import { createProductPath } from '@/utils/utils';
 
 export default function productCard(
   { name, image, pricePerUnit, id, permaLink }: CartItem,
@@ -6,7 +7,7 @@ export default function productCard(
 ): string {
   return `
   <div class="product-card">
-    <a href="/product/${permaLink}" data-link>
+    <a href=${createProductPath(permaLink)} data-link>
       <div class="product-card__img-container">
         <img
             class="product-card__img"
@@ -16,7 +17,7 @@ export default function productCard(
       </div>
     </a>
     <div class="product-card__title">
-      <a href="/product/${permaLink}" data-link>${name}</a>
+      <a href=${createProductPath(permaLink)} data-link>${name}</a>
     </div>
     <div class="product-card__footer">
       <span class="font-med">
