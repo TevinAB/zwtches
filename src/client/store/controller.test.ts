@@ -141,13 +141,13 @@ describe('Store controller tests', () => {
     //remove the products before calling get products
     store.getState().products.items = [];
 
-    await controller.getProducts({ pageNumber: 1 });
+    await controller.getProducts({ pageNumber: 1, category: 'men' });
 
     setTimeout(() => {
       //ensure its really mocked
       expect((axios.get as jest.Mock).mock.calls.length).toBe(1);
       expect((axios.get as jest.Mock).mock.calls[0][0]).toBe(
-        '/api/products?page=1'
+        '/api/products?page=1&cat=men'
       );
 
       expect(store.getState().products.items.length).toBe(2);
