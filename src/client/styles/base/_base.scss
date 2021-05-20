@@ -13,4 +13,8 @@ a {
 
 body {
   background-color: $secondary-color-darken-1;
+
+  @media screen and(min-width:$screen-med) {
+    overflow: auto !important;
+  }
 }

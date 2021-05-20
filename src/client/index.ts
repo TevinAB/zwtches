@@ -3,7 +3,10 @@ import Store from '@/store/store';
 import StoreController from '@/store/controller';
 import { State } from '@/types';
 import router from '@/pages/router';
-import navBar, { handleCartQtyChange } from '@/components/navBar/navBar';
+import navBar, {
+  handleCartQtyChange,
+  navAfterRender,
+} from '@/components/navBar/navBar';
 import footer from '@/components/footer/footer';
 import CatalogPage from '@/pages/catalog/catalog';
 import { getRouterEventName, getInitialState } from './utils/utils';
@@ -24,7 +27,10 @@ const routeMap = {
   let header = document.getElementById('header');
   if (header) {
     let cartQuantity = STORE.getState().shoppingCart.length;
+
     header.innerHTML = navBar(cartQuantity);
+    navAfterRender(header);
+
     storeController.subscribeToStore('ADD_ITEM', handleCartQtyChange);
     storeController.subscribeToStore('REMOVE_ITEM', handleCartQtyChange);
   }

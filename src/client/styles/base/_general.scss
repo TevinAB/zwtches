@@ -30,8 +30,28 @@
   display: none !important;
 }
 
+.hide-on-md {
+  @media screen and(max-width:$screen-med) {
+    display: none !important;
+  }
+}
+
+.hide-on-large {
+  @media screen and(min-width:$screen-med) {
+    display: none !important;
+  }
+}
+
+.slide-in-left {
+  left: 0 !important;
+}
+
 .skip-to-main:focus {
   width: auto;
   height: auto;
   background-color: $font-color-secondary;
+}
+
+.stop-overflow {
+  overflow: hidden;
 }

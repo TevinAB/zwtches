@@ -37,12 +37,12 @@ async function router(
 
     selectedView.afterRender();
 
-    linkOverride();
+    linkOverride(main);
   }
 }
 
-function linkOverride() {
-  const dataLinks = document.querySelectorAll('[data-link]');
+function linkOverride(scope: HTMLElement) {
+  const dataLinks = scope.querySelectorAll('[data-link]');
   dataLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
