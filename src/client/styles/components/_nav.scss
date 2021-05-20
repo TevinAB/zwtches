@@ -1,14 +1,39 @@
+@mixin navLinks {
+  font-size: 16px;
+  color: $font-color-secondary;
+  text-decoration: none;
+}
+
 .nav {
+  position: relative;
   background-color: $font-color-primary;
 
   &__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 25px;
+    padding: 18px 25px;
     max-width: $container-max-width;
     margin: auto;
     color: $font-color-secondary;
+  }
+
+  &__list {
+    margin: 0;
+    li {
+      display: inline-block;
+      padding: 3px 6px;
+      margin: 0px 3px;
+    }
+
+    a {
+      @include navLinks;
+    }
+
+    i {
+      font-size: 18px;
+      cursor: pointer;
+    }
   }
 
   &__logo {
@@ -22,12 +47,8 @@
     }
   }
 
-  &__right-content {
+  &__cart {
     display: flex;
-
-    a {
-      font-size: 18px;
-    }
   }
 
   &__cart-icon {
@@ -40,5 +61,26 @@
     font-size: 12px;
     user-select: none;
     pointer-events: none;
+  }
+
+  &__mobile {
+    z-index: 99;
+    background-color: $font-color-primary;
+    color: $font-color-secondary;
+    position: absolute;
+    width: 45vw;
+    height: 100vh;
+    bottom: -100vh;
+    left: -100%;
+    transition: all ease-in 0.2s;
+
+    li {
+      list-style: none;
+      margin-bottom: 6px;
+    }
+
+    a {
+      @include navLinks;
+    }
   }
 }
