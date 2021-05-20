@@ -47,13 +47,37 @@ async function getProduct(request: Request, response: Response) {
 
     response.json(product);
   } catch (error) {
-    response.status(400).json({ msg: 'Error fetching product.' });
+    response.status(400).json({ error: error.data.error });
+  }
+}
+
+async function getFeaturedItems(request: Request, response: Response) {
+  const { ips: itemsPerSection } = request.query;
+
+  try {
+    const commerce: any = new Commerce(process.env.COMMERCEJS_API_KEY);
+    const menItems = await commerce.products.list({
+      limit: itemsPerSection,
+      category_slug: ['men'],
+    });
+    const womenItems = await commerce.products.list({
+      limit: itemsPerSection,
+      category_slug: ['women'],
+    });
+
+    response.json({
+      men: { title: "Men's watches", items: menItems.data },
+      women: { title: "Women's watches", items: womenItems.data },
+    });
+  } catch (error) {
+    response.status(400).json({ msg: 'Error fetching featured items' });
   }
 }
 
 export default {
   getAllProducts,
   getProduct,
+  getFeaturedItems,
 };
 
 function getLastPageNumber(totalItems: number, itemsPerPage: number): number {

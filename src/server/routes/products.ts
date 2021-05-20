@@ -17,4 +17,12 @@ router.get('', productHandlers.getAllProducts);
  */
 router.get('/:permaLink', productHandlers.getProduct);
 
+/**
+ * @route /api/products/featured/items?ips
+ * @param ips - Items per section
+ * @description Get featured items for each section
+ * @access Public
+ */
+router.get('/featured/items', productHandlers.getFeaturedItems);
+
 export default router;
