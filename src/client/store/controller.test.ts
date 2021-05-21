@@ -1,7 +1,7 @@
-import { CartItem, State } from '@/types';
+import { CartItem, State, ProductItem } from '@/types';
 import Store from './store';
 import Controller from './controller';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 describe('Store controller tests', () => {
   jest.mock('axios');
@@ -10,14 +10,14 @@ describe('Store controller tests', () => {
   let state: {
     shoppingCart: Array<CartItem>;
     products: {
-      items: Array<{
-        id: string;
-        name: string;
-        price: { raw: number };
-        media: { source: string };
-        permalink: string;
-      }>;
+      items: Array<ProductItem>;
       lastPage: number;
+    };
+    featuredItems: {
+      [key: string]: {
+        title: string;
+        items: Array<ProductItem>;
+      };
     };
   };
   let controller: Controller;
@@ -32,20 +32,21 @@ describe('Store controller tests', () => {
           {
             name: 'Apple',
             id: TEST_ID,
-            price: { raw: 12.1 },
+            price: { raw: 12.1, formatted: 12.1 },
             media: { source: 'path/to/image' },
             permalink: 'WQaZ6z',
           },
           {
             name: 'Tv',
             id: 'tv-01',
-            price: { raw: 300.5 },
+            price: { raw: 300.5, formatted: 300.5 },
             media: { source: 'path/to/image' },
             permalink: 'WQaZ1z',
           },
         ],
         lastPage: 1,
       },
+      featuredItems: {},
     };
     store = new Store(state as State);
     store.setState = jest.fn(store.setState);
@@ -126,7 +127,7 @@ describe('Store controller tests', () => {
   });
 
   it('should fetch products and add the results to the store', async () => {
-    const mockedResObj = {
+    const mockedResObj: AxiosResponse = {
       data: {
         result: {
           items: state.products.items,
@@ -135,27 +136,49 @@ describe('Store controller tests', () => {
           },
         },
       },
+      status: 200,
+      statusText: 'OK',
+      config: {},
+      headers: {},
     };
-    axios.get = jest.fn().mockResolvedValueOnce(mockedResObj);
+
+    axios.get = jest.fn().mockResolvedValue(mockedResObj);
 
     //remove the products before calling get products
     store.getState().products.items = [];
 
     await controller.getProducts({ pageNumber: 1, category: 'men' });
 
-    setTimeout(() => {
-      //ensure its really mocked
-      expect((axios.get as jest.Mock).mock.calls.length).toBe(1);
-      expect((axios.get as jest.Mock).mock.calls[0][0]).toBe(
-        '/api/products?page=1&cat=men'
-      );
+    expect((axios.get as jest.Mock).mock.calls[0][0]).toBe(
+      '/api/products?page=1&cat=men'
+    );
 
-      expect(store.getState().products.items.length).toBe(2);
-      expect(store.getState().products.items[0].id).toBe(TEST_ID);
-      expect((store.setState as jest.Mock).mock.calls.length).toBe(1);
-      expect((store.setState as jest.Mock).mock.calls[0][0]).toBe(
-        'GET_PRODUCTS'
-      );
-    }, 0);
+    expect(store.getState().products.items.length).toBe(2);
+    expect(store.getState().products.items[0].id).toBe(TEST_ID);
+    expect((store.setState as jest.Mock).mock.calls.length).toBe(1);
+    expect((store.setState as jest.Mock).mock.calls[0][0]).toBe('GET_PRODUCTS');
+  });
+
+  it('should fetch featured items and add the result to the store', async () => {
+    const mockedResObj = {
+      data: {
+        men: {
+          title: "Men's watches",
+          items: [{ name: 'product1' }],
+        },
+      },
+    };
+    axios.get = jest.fn().mockResolvedValueOnce(mockedResObj);
+
+    await controller.getFeaturedSections({ itemsPerSection: 3 });
+
+    expect((axios.get as jest.Mock).mock.calls[0][0]).toBe(
+      '/api/products/featured/items?ips=3'
+    );
+
+    expect(store.getState().featuredItems).toEqual(mockedResObj.data);
+    expect((store.setState as jest.Mock).mock.calls[0][0]).toBe(
+      'GET_FEATURED_ITEMS'
+    );
   });
 });

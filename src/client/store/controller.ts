@@ -99,6 +99,24 @@ class StoreController {
       this.store.setState('GET_PRODUCTS_ERROR', oldState);
     }
   }
+
+  async getFeaturedSections(payload: { itemsPerSection: number }) {
+    const oldState = this.store.getState();
+    try {
+      const { itemsPerSection } = payload;
+      const response = await axios.get(
+        `/api/products/featured/items?ips=${itemsPerSection}`
+      );
+
+      const result = response.data;
+
+      const newState = Object.assign({}, oldState, { featuredItems: result });
+
+      this.store.setState('GET_FEATURED_ITEMS', newState);
+    } catch (error) {
+      this.store.setState('GET_FEATURED_ITEMS_ERROR', oldState);
+    }
+  }
 }
 
 export default StoreController;
