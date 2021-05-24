@@ -1,0 +1,16 @@
+.home-page {
+  min-height: 100vh;
+  padding: 0 0 $space-lg;
+
+  & > .featured-items:not(:last-child) {
+    margin-bottom: $space-lg;
+  }
+
+  &__banner {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    margin-bottom: $space-lg;
+    user-select: none;
+  }
+}

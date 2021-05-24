@@ -10,8 +10,10 @@ export default function navBar(cartQuantity: number = 0): string {
 
       <nav>
         <ul class="nav__list">
-          <li class="hide-on-md"><a href="/catalog?page=1&cat=men" data-link>Men</a></li>
-          <li class="hide-on-md"><a href="/catalog?page=1&cat=women" data-link>Women</a></li>
+          <li class="hide-on-md"><a href="/catalog?page=1&cat=men" data-link
+          aria-label="Category, Men.">Men</a></li>
+          <li class="hide-on-md"><a href="/catalog?page=1&cat=women" data-link
+          aria-label="Category, Women.">Women</a></li>
           <li>
             <div class="nav__cart">
               <a href="/cart" data-link aria-label="View your cart.">

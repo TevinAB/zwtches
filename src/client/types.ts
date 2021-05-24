@@ -3,7 +3,9 @@ export type EventTypes =
   | 'REMOVE_ITEM'
   | 'ITEM_QTY_CHANGE'
   | 'GET_PRODUCTS'
-  | 'GET_PRODUCTS_ERROR';
+  | 'GET_PRODUCTS_ERROR'
+  | 'GET_FEATURED_ITEMS'
+  | 'GET_FEATURED_ITEMS_ERROR';
 
 //All pages must implement this interface
 export interface View {
@@ -33,18 +35,30 @@ export interface CartItem {
   permaLink: string;
 }
 
+export interface ProductItem {
+  id: string;
+  name: string;
+  price: { raw: number; formatted: number };
+  media: { source: string };
+  permalink: string;
+}
+
+export interface SectionData {
+  title: string;
+  items: Array<ProductItem>;
+  category: string;
+}
+
 //The global state must implement this interface
 export interface State {
   shoppingCart: Array<CartItem>;
 
   products: {
-    items: Array<{
-      id: string;
-      name: string;
-      price: { raw: number; formatted: number };
-      media: { source: string };
-      permalink: string;
-    }>;
+    items: Array<ProductItem>;
     lastPage: number;
+  };
+
+  featuredItems: {
+    [key: string]: SectionData;
   };
 }

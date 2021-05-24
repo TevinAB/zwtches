@@ -1,8 +1,8 @@
-import { getRouterEventName } from '@/utils/utils';
 import { View, State } from '@/types';
 import StoreController from '@/store/controller';
 import productCard from '@/components/productCard/productCard';
 import pagination from '@/components/pagination/pagination';
+import loadError from '@/components/loadError/loadError';
 
 class Catalog implements View {
   private controller: StoreController;
@@ -88,21 +88,9 @@ class Catalog implements View {
 
   handleGetProductsFailure(state: State) {
     this.catalogPage.innerHTML = '';
+    const error = loadError();
 
-    const errorMsg = document.createElement('h3');
-    errorMsg.appendChild(
-      document.createTextNode('Oops, an error has occurred!')
-    );
-
-    const reloadBtn = document.createElement('button');
-    reloadBtn.classList.add('btn-reload');
-    reloadBtn.innerHTML = '<i class="fas fa-redo"></i> Reload';
-    reloadBtn.addEventListener('click', () => {
-      window.dispatchEvent(new Event(getRouterEventName()));
-    });
-
-    this.catalogPage.appendChild(errorMsg);
-    this.catalogPage.appendChild(reloadBtn);
+    this.catalogPage.appendChild(error);
   }
 
   afterRender() {
