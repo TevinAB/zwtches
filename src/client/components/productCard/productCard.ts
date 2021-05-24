@@ -7,12 +7,13 @@ export default function productCard(
 ): string {
   return `
   <div class="product-card">
-    <a href=${createProductPath(permaLink)} data-link>
+    <a href=${createProductPath(permaLink)} data-link aria-label="${name}">
       <div class="product-card__img-container">
         <img
             class="product-card__img"
             src="${image}"
             alt=""
+            role="presentation"
           />
       </div>
     </a>
@@ -21,12 +22,14 @@ export default function productCard(
     </div>
     <div class="product-card__footer">
       <span class="font-med">
-        <span class="visually-hidden">Price.</span>$${pricePerUnit}
+        <span class="visually-hidden">.Price.</span>$${pricePerUnit}
       </span>
       <button type="button" class="btn-add-to-cart ${
         isInCart ? 'hidden' : ''
       }" data-prod-id="${id}">Add to cart</button>
-      <span class="${isInCart ? '' : 'hidden'} font-bold">In cart.</span>
+      <span class="${
+        isInCart ? '' : 'hidden'
+      } font-bold" aria-label=".. In cart.">In cart.</span>
     </div>
   </div>
   `;

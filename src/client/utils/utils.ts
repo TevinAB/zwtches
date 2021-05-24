@@ -42,6 +42,7 @@ export function getInitialState(): State {
   return {
     shoppingCart: cart instanceof Array ? cart : [],
     products: { items: [], lastPage: 1 },
+    featuredItems: {},
   };
 }
 

@@ -69,8 +69,12 @@ async function getFeaturedItems(request: Request, response: Response) {
     });
 
     response.json({
-      men: { title: "Men's watches", items: menItems.data },
-      women: { title: "Women's watches", items: womenItems.data },
+      men: { title: "Men's watches", items: menItems.data, category: 'men' },
+      women: {
+        title: "Women's watches",
+        items: womenItems.data,
+        category: 'women',
+      },
     });
   } catch (error) {
     response.status(400).json({ msg: 'Error fetching featured items' });
