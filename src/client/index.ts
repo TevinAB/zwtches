@@ -3,20 +3,13 @@ import Store from '@/store/store';
 import StoreController from '@/store/controller';
 import { State } from '@/types';
 import router from '@/pages/router';
+import routeMap from '@/pages/routeMap';
 import navBar, {
   handleCartQtyChange,
   navAfterRender,
 } from '@/components/navBar/navBar';
 import footer from '@/components/footer/footer';
-import CatalogPage from '@/pages/catalog/catalog';
-import HomePage from '@/pages/home/home';
 import { getRouterEventName, getInitialState } from './utils/utils';
-
-//keys are converted to regex to match pathname
-const routeMap = {
-  '/catalog[?]page=[0-9]+&cat=[a-zA-Z]+$': CatalogPage,
-  '/$': HomePage,
-};
 
 (function (window: Window) {
   const initialState: State = getInitialState();
