@@ -37,8 +37,7 @@ export default function CartItem({
         </div>
 
         <button aria-describedby="rmv-action" class="cart-item__remove-item btn-remove" 
-        data-prod-id="${id}">Remove</button>
-        <span role="presentation" id="rmv-action" class="visually-hidden">Remove this item from your cart.</span>
+        data-prod-id="${id}" aria-label="Remove ${name} from your cart.">Remove</button>
       </div>
 
       
