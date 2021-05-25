@@ -23,6 +23,7 @@
 
   &__img {
     display: block;
+    min-width: 64px;
     width: 64px;
     height: 110px;
     object-fit: cover;

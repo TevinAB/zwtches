@@ -117,6 +117,10 @@ class StoreController {
       this.store.setState('GET_FEATURED_ITEMS_ERROR', oldState);
     }
   }
+
+  viewCart() {
+    return this.store.getState().shoppingCart.slice();
+  }
 }
 
 export default StoreController;

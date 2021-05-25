@@ -49,3 +49,9 @@ export function getInitialState(): State {
 export function storeCart(cart: Array<CartItem>) {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
+
+export function getSubtotal(cart: Array<CartItem>) {
+  return cart
+    .reduce((total, item) => (total += item.quantity * item.pricePerUnit), 0)
+    .toFixed(2);
+}
