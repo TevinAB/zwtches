@@ -1,4 +1,4 @@
-import { EventTypes, CartItem, State } from '@/types';
+import { EventTypes, CartItem, State, ProductItem } from '@/types';
 import Store from '@/store/store';
 import axios from 'axios';
 
@@ -16,9 +16,23 @@ class StoreController {
 
   addItem(payload: { productId: string }) {
     const oldState = this.store.getState();
-    const product = oldState.products.items.find(
-      (prod) => prod.id === payload.productId
-    );
+
+    //create item pool from all the different possible sections. Done because an item might exist in
+    //the featured items section but not necessarily be in the products list which contains items
+    //from a specify category
+    const pool: Array<ProductItem> = [];
+
+    //add items from all sections to the pool
+    const sections = Object.keys(oldState.featuredItems);
+    sections.forEach((section) => {
+      pool.push(...oldState.featuredItems[section].items);
+    });
+
+    //add items from the products object
+    pool.push(...oldState.products.items);
+
+    //Search pool for product to be added to cart
+    const product = pool.find((prod) => prod.id === payload.productId);
 
     //no such product
     if (!product) return;
