@@ -23,25 +23,22 @@ export default function CartItem({
         <div class="cart-item__mid-section__inner-left">
           <div class="cart-item__label-combo cart-item__quantity-box">
             <span aria-hidden="true" class="font-med">Qty:</span>
-            <select aria-label="Quantity" data-prod-quantity data-prod-id="${id}">
-              ${buildSelectOptions(10, quantity)}
+            <select aria-label="Quantity" data-prod-quantity data-prod-id="${id}"
+            >${buildSelectOptions(10, quantity)}
             </select>
           </div>
           
           <div class="cart-item__label-combo">
             <span class="font-sm visually-hidden">Total price for this item.</span>
-            <span class="font-lg" id=${'total-' + id} data-single-price="${pricePerUnit}">
-              $${(quantity * pricePerUnit).toFixed(2)}
-            </span>
+            <span class="font-lg" id=${'total-' + id} data-single-price="${pricePerUnit}"
+            >$${(quantity * pricePerUnit).toFixed(2)}</span>
           </div>
 
         </div>
 
         <button aria-describedby="rmv-action" class="cart-item__remove-item btn-remove" 
         data-prod-id="${id}">Remove</button>
-        <span role="presentation" id="rmv-action" class="visually-hidden">
-          Remove this item from your cart.
-        </span>
+        <span role="presentation" id="rmv-action" class="visually-hidden">Remove this item from your cart.</span>
       </div>
 
       
