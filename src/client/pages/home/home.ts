@@ -3,6 +3,7 @@ import { View, State } from '@/types';
 import featuredSection from '@/components/featuredSection/featuredSection';
 import loadError from '@/components/loadError/loadError';
 import banner from '@/assets/banner.jpg';
+import { setAddToCartListeners } from '@/utils/utils';
 
 class Home implements View {
   private home: HTMLElement;
@@ -58,7 +59,7 @@ class Home implements View {
   }
 
   afterRender() {
-    //
+    setAddToCartListeners(this.home, this.controller);
   }
 
   unmount() {

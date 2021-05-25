@@ -3,6 +3,7 @@ import StoreController from '@/store/controller';
 import productCard from '@/components/productCard/productCard';
 import pagination from '@/components/pagination/pagination';
 import loadError from '@/components/loadError/loadError';
+import { setAddToCartListeners } from '@/utils/utils';
 
 class Catalog implements View {
   private controller: StoreController;
@@ -94,18 +95,8 @@ class Catalog implements View {
   }
 
   afterRender() {
-    //listeners on btns
-    const addToCartBtns = document.querySelectorAll('.btn-add-to-cart');
-    addToCartBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const prodId = btn.getAttribute('data-prod-id') || '';
-
-        this.controller.addItem({ productId: prodId });
-
-        btn.classList.toggle('hidden');
-        btn.nextElementSibling?.classList.toggle('hidden');
-      });
-    });
+    //set listeners on add to cart btns
+    setAddToCartListeners(this.catalogPage, this.controller);
   }
 
   unmount() {
