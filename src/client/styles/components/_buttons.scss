@@ -24,3 +24,15 @@
   background-color: $font-color-primary;
   border-color: $font-color-primary;
 }
+
+.checkout {
+  @include button;
+  background-color: $checkout-btn-color;
+  border-color: $checkout-btn-color;
+  color: $font-color-secondary;
+
+  &:hover {
+    background-color: $checkout-btn-color-dark;
+    border-color: $checkout-btn-color-dark;
+  }
+}

@@ -2,6 +2,9 @@ $font-stack: 'Nunito', sans-serif;
 $font-color-primary: black;
 $font-color-secondary: white;
 
+$checkout-btn-color: #3388dd;
+$checkout-btn-color-dark: scale-color($checkout-btn-color, $lightness: -12%);
+
 $secondary-color-darken-1: scale-color($font-color-secondary, $lightness: -12%);
 
 $container-max-width: 85%;
@@ -15,6 +18,12 @@ $btn-padding: 0.25em 0.3125em;
 $btn-border-size: 2px;
 $btn-border-radius: 0.4375em;
 
+$card-border-radius: 7px;
+
+$box-shadow-1: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+  rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+  rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+
 $screen-small: 320px;
 $screen-med: 720px;
-$screen-lg: 1280;
+$screen-lg: 1280px;

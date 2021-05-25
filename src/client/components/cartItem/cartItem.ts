@@ -14,7 +14,9 @@ export default function CartItem({
     <div class="cart-item__right-content">
       <div class="cart-item__title">
         <a class="font-bold" href="/product/${permaLink}" data-link>${name}</a>
-        <span class="cart-item__single-price"><span class="visually-hidden">Price for one item.</span>$${pricePerUnit}</span>
+        <span class="cart-item__single-price"><span class="visually-hidden">Price for one item.</span>$${pricePerUnit.toFixed(
+          2
+        )}</span>
       </div>
 
       <div class="cart-item__mid-section">
@@ -28,15 +30,18 @@ export default function CartItem({
           
           <div class="cart-item__label-combo">
             <span class="font-sm visually-hidden">Total price for this item.</span>
-            <span class="font-lg" id=${'total-' + id}>$${
-    quantity * pricePerUnit
-  }</span>
+            <span class="font-lg" id=${'total-' + id} data-single-price="${pricePerUnit}">
+              $${(quantity * pricePerUnit).toFixed(2)}
+            </span>
           </div>
 
         </div>
 
-        <button aria-describedby="rmv-action" class="cart-item__remove-item btn-remove" data-prod-id="${id}">Remove</button>
-        <span role="presentation" id="rmv-action" class="visually-hidden">Remove this item from your cart.</span>
+        <button aria-describedby="rmv-action" class="cart-item__remove-item btn-remove" 
+        data-prod-id="${id}">Remove</button>
+        <span role="presentation" id="rmv-action" class="visually-hidden">
+          Remove this item from your cart.
+        </span>
       </div>
 
       

@@ -1,3 +1,6 @@
 # Ignore artifacts:
 dist
 coverage
+
+#annoying reformatting problem
+cartItem.ts
