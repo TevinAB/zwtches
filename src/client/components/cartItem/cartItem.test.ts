@@ -75,7 +75,7 @@ describe('Cart item component', () => {
     const totalPrice = document.querySelector(`#total-${product.id}`);
 
     expect(totalPrice?.innerHTML).toBe(
-      `$${product.quantity * product.pricePerUnit}`
+      `$${(product.quantity * product.pricePerUnit).toFixed(2)}`
     );
   });
 });
