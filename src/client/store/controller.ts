@@ -19,7 +19,7 @@ class StoreController {
 
     //create item pool from all the different possible sections. Done because an item might exist in
     //the featured items section but not necessarily be in the products list which contains items
-    //from a specify category
+    //from a specific category
     const pool: Array<ProductItem> = [];
 
     //add items from all sections to the pool
