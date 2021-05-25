@@ -35,7 +35,7 @@ class Home implements View {
     return this.home;
   }
 
-  handleGetFeaturedSections(state: State) {
+  private handleGetFeaturedSections(state: State) {
     this.home.innerHTML = '';
 
     //add banner
@@ -51,7 +51,7 @@ class Home implements View {
     });
   }
 
-  handleGetFeaturedSectionsError(state: State) {
+  private handleGetFeaturedSectionsError(state: State) {
     this.home.innerHTML = '';
     const error = loadError();
 

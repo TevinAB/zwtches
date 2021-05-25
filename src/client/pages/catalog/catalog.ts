@@ -48,7 +48,7 @@ class Catalog implements View {
     return this.catalogPage;
   }
 
-  handleGetProducts(state: State) {
+  private handleGetProducts(state: State) {
     this.catalogPage.innerHTML = `
       <ul class="catalog__list">
         ${state.products.items
@@ -87,7 +87,7 @@ class Catalog implements View {
     `;
   }
 
-  handleGetProductsFailure(state: State) {
+  private handleGetProductsFailure(state: State) {
     this.catalogPage.innerHTML = '';
     const error = loadError();
 
