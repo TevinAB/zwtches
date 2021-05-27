@@ -1,4 +1,5 @@
 import { CartItem } from '@/types';
+import quantityBox from '@/components/quantityBox/quantityBox'
 
 export default function CartItem({
   name,
@@ -21,19 +22,7 @@ export default function CartItem({
 
       <div class="cart-item__mid-section">
         <div class="cart-item__mid-section__inner-left">
-          <div class="cart-item__label-combo cart-item__quantity-box">
-            <span aria-hidden="true" class="font-med">Qty:</span>
-            <select aria-label="Quantity" data-prod-quantity data-prod-id="${id}"
-            >${buildSelectOptions(10, quantity)}
-            </select>
-          </div>
-          
-          <div class="cart-item__label-combo">
-            <span class="font-sm visually-hidden">Total price for this item.</span>
-            <span class="font-lg" id=${'total-' + id} data-single-price="${pricePerUnit}"
-            >$${(quantity * pricePerUnit).toFixed(2)}</span>
-          </div>
-
+          ${quantityBox(quantity,id,pricePerUnit)}
         </div>
 
         <button aria-describedby="rmv-action" class="cart-item__remove-item btn-remove" 
@@ -44,18 +33,4 @@ export default function CartItem({
     </div>
   </div>
   `;
-}
-
-function buildSelectOptions(total: number, currentValue: number): string {
-  let options: string[] = [];
-
-  for (let i = 1; i <= total; i++) {
-    options.push(
-      i === currentValue
-        ? `<option selected value="${i}">${i}</option>`
-        : `<option value="${i}">${i}</option>`
-    );
-  }
-
-  return options.join('');
 }
