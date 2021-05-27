@@ -5,7 +5,9 @@ export type EventTypes =
   | 'GET_PRODUCTS'
   | 'GET_PRODUCTS_ERROR'
   | 'GET_FEATURED_ITEMS'
-  | 'GET_FEATURED_ITEMS_ERROR';
+  | 'GET_FEATURED_ITEMS_ERROR'
+  | 'GET_SELECTED_PRODUCT'
+  | 'GET_SELECTED_PRODUCT_ERROR';
 
 //All pages must implement this interface
 export interface View {
@@ -41,6 +43,7 @@ export interface ProductItem {
   price: { raw: number; formatted: number };
   media: { source: string };
   permalink: string;
+  description: string;
 }
 
 export interface SectionData {
@@ -61,4 +64,7 @@ export interface State {
   featuredItems: {
     [key: string]: SectionData;
   };
+
+  //the product the user sees info about on the product desc page
+  selectedProduct: ProductItem | null;
 }

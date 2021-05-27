@@ -17,19 +17,7 @@ class StoreController {
   addItem(payload: { productId: string }) {
     const oldState = this.store.getState();
 
-    //create item pool from all the different possible sections. Done because an item might exist in
-    //the featured items section but not necessarily be in the products list which contains items
-    //from a specific category
-    const pool: Array<ProductItem> = [];
-
-    //add items from all sections to the pool
-    const sections = Object.keys(oldState.featuredItems);
-    sections.forEach((section) => {
-      pool.push(...oldState.featuredItems[section].items);
-    });
-
-    //add items from the products object
-    pool.push(...oldState.products.items);
+    const pool: Array<ProductItem> = this.createItemPool(oldState);
 
     //Search pool for product to be added to cart
     const product = pool.find((prod) => prod.id === payload.productId);
@@ -132,8 +120,67 @@ class StoreController {
     }
   }
 
+  async getSelectedProduct(payload: { permalink: string }) {
+    const oldState = this.store.getState();
+
+    const pool = this.createItemPool(oldState);
+
+    const matchingProduct = pool.find(
+      (item) => item.permalink === payload.permalink
+    );
+
+    //if we found it in our local state
+    if (matchingProduct) {
+      this.store.setState('GET_SELECTED_PRODUCT', {
+        ...oldState,
+        selectedProduct: matchingProduct,
+      });
+
+      return;
+    }
+
+    //check server
+    try {
+      const response = await axios.get(`/api/products/${payload.permalink}`);
+
+      const product = response.data;
+
+      this.store.setState('GET_SELECTED_PRODUCT', {
+        ...oldState,
+        selectedProduct: product,
+      });
+    } catch (error) {
+      this.store.setState('GET_SELECTED_PRODUCT_ERROR', oldState);
+    }
+  }
+
   viewCart() {
     return this.store.getState().shoppingCart.slice();
+  }
+
+  getSubtotal() {
+    const cart = this.store.getState().shoppingCart;
+    return cart
+      .reduce((total, item) => (total += item.quantity * item.pricePerUnit), 0)
+      .toFixed(2);
+  }
+
+  private createItemPool(state: State): Array<ProductItem> {
+    //create item pool from all the different possible sections.
+    //An item might exist in the featured items section but not necessarily
+    //be in the products list etc. which contains items from a specific category
+    const pool: Array<ProductItem> = [];
+
+    //add items from all sections to the pool
+    const sections = Object.keys(state.featuredItems);
+    sections.forEach((section) => {
+      pool.push(...state.featuredItems[section].items);
+    });
+
+    //add items from the products object
+    pool.push(...state.products.items);
+
+    return pool;
   }
 }
 

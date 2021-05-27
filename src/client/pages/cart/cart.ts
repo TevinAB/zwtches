@@ -1,7 +1,7 @@
-import StoreController from '@/store/controller';
+import StoreController from '@/storeController/controller';
 import { State, View } from '@/types';
 import cartItem from '@/components/cartItem/cartItem';
-import { getSubtotal, getRouterEventName } from '@/utils/utils';
+import { getRouterEventName } from '@/utils/utils';
 
 class Cart implements View {
   controller: StoreController;
@@ -43,7 +43,7 @@ class Cart implements View {
         <h2>Summary</h2>
         <div class="cart__summary__price-info">
           <h3>Subtotal:</h3>
-          <h3 id="subtotal">$${getSubtotal(cart)}</h3>
+          <h3 id="subtotal">$${this.controller.getSubtotal()}</h3>
         </div>
         <button class="checkout">Checkout</button>
       </div>
@@ -107,7 +107,7 @@ class Cart implements View {
 
   private handleQuantityChange(newState: State) {
     const subTotal = this.cart.querySelector('[id="subtotal"]');
-    if (subTotal) subTotal.innerHTML = `$${getSubtotal(newState.shoppingCart)}`;
+    if (subTotal) subTotal.innerHTML = `$${this.controller.getSubtotal()}`;
   }
 
   private handleRemoveItem(newState: State) {

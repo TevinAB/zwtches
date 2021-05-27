@@ -1,4 +1,4 @@
-import StoreController from '@/store/controller';
+import StoreController from '@/storeController/controller';
 import { CartItem, State } from '@/types';
 /**
  * @param path
@@ -44,17 +44,12 @@ export function getInitialState(): State {
     shoppingCart: cart instanceof Array ? cart : [],
     products: { items: [], lastPage: 1 },
     featuredItems: {},
+    selectedProduct: null,
   };
 }
 
 export function storeCart(cart: Array<CartItem>) {
   localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-export function getSubtotal(cart: Array<CartItem>) {
-  return cart
-    .reduce((total, item) => (total += item.quantity * item.pricePerUnit), 0)
-    .toFixed(2);
 }
 
 export function setAddToCartListeners(

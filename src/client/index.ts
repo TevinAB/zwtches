@@ -1,6 +1,6 @@
 import './styles/main.scss';
 import Store from '@/store/store';
-import StoreController from '@/store/controller';
+import StoreController from '@/storeController/controller';
 import { State } from '@/types';
 import router from '@/pages/router';
 import routeMap from '@/pages/routeMap';

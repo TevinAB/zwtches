@@ -1,5 +1,5 @@
 import { View, State } from '@/types';
-import StoreController from '@/store/controller';
+import StoreController from '@/storeController/controller';
 import productCard from '@/components/productCard/productCard';
 import pagination from '@/components/pagination/pagination';
 import loadError from '@/components/loadError/loadError';
