@@ -1,5 +1,5 @@
 import { CartItem, State, ProductItem } from '@/types';
-import Store from './store';
+import Store from '../store/store';
 import Controller from './controller';
 import axios, { AxiosResponse } from 'axios';
 
@@ -35,6 +35,7 @@ describe('Store controller tests', () => {
             price: { raw: 12.1, formatted: 12.1 },
             media: { source: 'path/to/image' },
             permalink: 'WQaZ6z',
+            description: '',
           },
           {
             name: 'Tv',
@@ -42,6 +43,7 @@ describe('Store controller tests', () => {
             price: { raw: 300.5, formatted: 300.5 },
             media: { source: 'path/to/image' },
             permalink: 'WQaZ1z',
+            description: '',
           },
         ],
         lastPage: 1,
@@ -179,6 +181,32 @@ describe('Store controller tests', () => {
     expect(store.getState().featuredItems).toEqual(mockedResObj.data);
     expect((store.setState as jest.Mock).mock.calls[0][0]).toBe(
       'GET_FEATURED_ITEMS'
+    );
+  });
+
+  it('should set the value of selectedProduct using a product found on the client side', () => {
+    const testObj = state.products.items[0];
+
+    axios.get = jest.fn().mockResolvedValueOnce({});
+
+    controller.getSelectedProduct({ permalink: testObj.permalink });
+
+    expect((axios.get as jest.Mock).mock.calls.length).toBe(0);
+    expect(store.getState().selectedProduct).toEqual(testObj);
+  });
+
+  it('should get the selectedProduct from the server if its not found client side', () => {
+    const mockedResObj = {
+      perma: 'asZea',
+    };
+
+    axios.get = jest.fn().mockResolvedValueOnce(mockedResObj);
+
+    controller.getSelectedProduct({ permalink: mockedResObj.perma });
+
+    expect((axios.get as jest.Mock).mock.calls.length).toBe(1);
+    expect(axios.get as jest.Mock).toBeCalledWith(
+      `/api/products/${mockedResObj.perma}`
     );
   });
 });

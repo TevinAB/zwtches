@@ -1,4 +1,4 @@
-import StoreController from '@/store/controller';
+import StoreController from '@/storeController/controller';
 import { View, State } from '@/types';
 import featuredSection from '@/components/featuredSection/featuredSection';
 import loadError from '@/components/loadError/loadError';

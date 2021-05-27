@@ -29,9 +29,9 @@ class Store {
   }
 
   setState(eventType: EventTypes, newState: State): void {
-    //deep clone new state.
-    this.state = JSON.parse(JSON.stringify(newState));
+    this.state = { ...newState };
 
+    //saves to local storage
     storeCart(this.state.shoppingCart);
 
     this.notify(eventType);

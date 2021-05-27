@@ -1,5 +1,5 @@
 import { View } from '@/types';
-import StoreController from '@/store/controller';
+import StoreController from '@/storeController/controller';
 import { getRouterEventName, getViewFromUrl } from '@/utils/utils';
 import NotFound from '@/pages/404/notFound';
 
