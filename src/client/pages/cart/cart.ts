@@ -105,12 +105,12 @@ class Cart implements View {
     });
   }
 
-  private handleQuantityChange(newState: State) {
+  private handleQuantityChange(state: State) {
     const subTotal = this.cart.querySelector('[id="subtotal"]');
     if (subTotal) subTotal.innerHTML = `$${this.controller.getSubtotal()}`;
   }
 
-  private handleRemoveItem(newState: State) {
+  private handleRemoveItem(state: State) {
     //rerender view
     window.dispatchEvent(new Event(getRouterEventName()));
   }

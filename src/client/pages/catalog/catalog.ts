@@ -11,15 +11,18 @@ class Catalog implements View {
   private pageNumber: number;
   private category: string;
 
+  private searchParams: URLSearchParams;
+
   //collection of all unsubscribe function for each subscription made
   private unsubscribe: Array<() => void> = [];
 
-  constructor(controller: StoreController, params: URLSearchParams) {
+  constructor(controller: StoreController, location: Location) {
     this.catalogPage = document.createElement('div');
     this.catalogPage.classList.add('catalog');
 
-    this.pageNumber = Number(params.get('page'));
-    this.category = params.get('cat') || '';
+    this.searchParams = new URLSearchParams(location.search);
+    this.pageNumber = Number(this.searchParams.get('page'));
+    this.category = this.searchParams.get('cat') || '';
 
     this.controller = controller;
 
