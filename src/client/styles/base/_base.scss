@@ -2,6 +2,23 @@
   box-sizing: border-box;
 }
 
+:root {
+  --num-cards-per-row: 4;
+  --card-margin: 16px;
+
+  @media screen and(max-width: 1080px) {
+    --num-cards-per-row: 3;
+  }
+
+  @media screen and(max-width: $screen-med) {
+    --num-cards-per-row: 2;
+  }
+
+  @media screen and(max-width: 460px) {
+    --num-cards-per-row: 1;
+  }
+}
+
 a {
   text-decoration: none;
 
