@@ -65,7 +65,7 @@ class ProductPage implements View {
       <div class="product-page__price-box">
         <h3>$${price}</h3>
         <div>
-          <button type="button" class="btn-add-to-cart ${
+          <button type="button" class="btn btn--add-to-cart ${
             isInCart ? 'hidden' : ''
           }" data-prod-id="${id}">Add to cart</button>
           <span class="${

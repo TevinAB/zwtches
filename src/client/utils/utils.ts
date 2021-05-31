@@ -56,7 +56,7 @@ export function setAddToCartListeners(
   scope: HTMLElement,
   controller: StoreController
 ) {
-  const addToCartBtns = scope.querySelectorAll('.btn-add-to-cart');
+  const addToCartBtns = scope.querySelectorAll('.btn--add-to-cart');
 
   addToCartBtns.forEach((btn) => {
     btn.addEventListener('click', () => {

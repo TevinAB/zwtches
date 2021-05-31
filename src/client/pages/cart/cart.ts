@@ -45,7 +45,7 @@ class Cart implements View {
           <h3>Subtotal:</h3>
           <h3 id="subtotal">$${this.controller.getSubtotal()}</h3>
         </div>
-        <button class="checkout">Checkout</button>
+        <button class="btn btn--checkout">Checkout</button>
       </div>
     </div>
     `;
@@ -93,7 +93,7 @@ class Cart implements View {
 
   private setRemoveButtonListeners() {
     const removeBtns: NodeListOf<HTMLButtonElement> = this.cart.querySelectorAll(
-      '.btn-remove'
+      '.btn--remove'
     );
 
     removeBtns.forEach((button) => {

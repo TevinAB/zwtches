@@ -25,11 +25,9 @@ export default function CartItem({
           ${quantityBox(quantity,id,pricePerUnit)}
         </div>
 
-        <button aria-describedby="rmv-action" class="cart-item__remove-item btn-remove" 
+        <button aria-describedby="rmv-action" class="cart-item__remove-item btn btn--remove" 
         data-prod-id="${id}" aria-label="Remove ${name} from your cart.">Remove</button>
       </div>
-
-      
     </div>
   </div>
   `;

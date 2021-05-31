@@ -38,7 +38,7 @@ export default function featuredSection(
           .join('')}
       </ul>
     </div>
-    <a href='/catalog?page=1&cat=${category}' data-link class="featured-items__view-all"
+    <a href='/catalog?page=1&cat=${category}' data-link class="btn featured-items__view-all"
     aria-label="View all ${title}..">View All</a>
   </section>
   `;
