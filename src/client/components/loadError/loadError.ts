@@ -10,7 +10,8 @@ export default function error(
   errorMsg.appendChild(document.createTextNode(message));
 
   const reloadBtn = document.createElement('button');
-  reloadBtn.classList.add('btn-reload');
+  reloadBtn.classList.add('btn');
+  reloadBtn.classList.add('btn--reload');
   reloadBtn.innerHTML = '<i class="fas fa-redo"></i> Reload';
   reloadBtn.addEventListener('click', () => {
     window.dispatchEvent(new Event(getRouterEventName()));

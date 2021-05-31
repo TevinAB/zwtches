@@ -1,4 +1,4 @@
-@mixin button {
+.btn {
   border: $btn-border-size solid;
   border-radius: $btn-border-radius;
   padding: $btn-padding;
@@ -6,8 +6,7 @@
   transition: background-color 0.2s ease-in;
 }
 
-.btn-add-to-cart {
-  @include button;
+.btn--add-to-cart {
   color: $font-color-primary;
   background-color: $font-color-secondary;
   border-color: $font-color-primary;
@@ -17,16 +16,14 @@
   }
 }
 
-.btn-remove,
-.btn-reload {
-  @include button;
+.btn--remove,
+.btn--reload {
   color: $font-color-secondary;
   background-color: $font-color-primary;
   border-color: $font-color-primary;
 }
 
-.checkout {
-  @include button;
+.btn--checkout {
   background-color: $checkout-btn-color;
   border-color: $checkout-btn-color;
   color: $font-color-secondary;

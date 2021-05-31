@@ -55,7 +55,7 @@ describe('Product Card component', () => {
   it('should have an add to cart button', () => {
     if (appElement) appElement.innerHTML = cardComponent();
 
-    const addToCart = document.querySelector('.btn-add-to-cart');
+    const addToCart = document.querySelector('.btn--add-to-cart');
     expect(addToCart).not.toBe(null);
   });
 

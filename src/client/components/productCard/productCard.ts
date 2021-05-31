@@ -24,7 +24,7 @@ export default function productCard(
       <span class="font-med">
         <span class="visually-hidden">.Price.</span>$${pricePerUnit}
       </span>
-      <button type="button" class="btn-add-to-cart ${
+      <button type="button" class="btn btn--add-to-cart ${
         isInCart ? 'hidden' : ''
       }" data-prod-id="${id}">Add to cart</button>
       <span class="${
