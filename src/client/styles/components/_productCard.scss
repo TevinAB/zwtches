@@ -1,14 +1,13 @@
 .product-card {
-  width: 211px;
+  width: 100%;
   display: inline-block;
   padding: 20px 12px 0px;
-  margin: $space-small;
   text-align: left;
   border-radius: $card-border-radius;
   box-shadow: $box-shadow-1;
 
   &__img-container {
-    width: calc(200px - 16px);
+    width: 100%;
     height: 200px;
     overflow: hidden;
   }
@@ -36,11 +35,15 @@
 
   &__footer {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: $space-small;
     min-height: 31px;
+
+    span {
+      padding: $btn-padding;
+      border: $btn-border-size solid transparent;
+    }
   }
 
   @media screen and(max-width: $screen-small) {
