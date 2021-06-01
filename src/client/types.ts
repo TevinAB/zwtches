@@ -7,7 +7,8 @@ export type EventTypes =
   | 'GET_FEATURED_ITEMS'
   | 'GET_FEATURED_ITEMS_ERROR'
   | 'GET_SELECTED_PRODUCT'
-  | 'GET_SELECTED_PRODUCT_ERROR';
+  | 'GET_SELECTED_PRODUCT_ERROR'
+  | 'CHECKOUT';
 
 //All pages must implement this interface
 export interface View {
@@ -67,4 +68,11 @@ export interface State {
 
   //the product the user sees info about on the product desc page
   selectedProduct: ProductItem | null;
+}
+
+export interface ValidatorOptions {
+  noSpace?: boolean;
+  noNumbers?: boolean;
+  email?: boolean;
+  minLength?: number;
 }

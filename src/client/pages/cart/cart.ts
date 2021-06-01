@@ -55,6 +55,7 @@ class Cart implements View {
   afterRender() {
     this.setSelectListeners();
     this.setRemoveButtonListeners();
+    this.setCheckoutListener();
   }
 
   unmount() {
@@ -102,6 +103,17 @@ class Cart implements View {
 
         this.controller.removeItem({ productId });
       });
+    });
+  }
+
+  private setCheckoutListener() {
+    const checkout = this.cart.querySelector(
+      '.btn--checkout'
+    ) as HTMLButtonElement;
+
+    checkout.addEventListener('click', () => {
+      history.pushState({}, '', '/checkout');
+      window.dispatchEvent(new Event(getRouterEventName()));
     });
   }
 

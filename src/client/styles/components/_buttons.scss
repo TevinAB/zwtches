@@ -23,7 +23,8 @@
   border-color: $font-color-primary;
 }
 
-.btn--checkout {
+.btn--checkout,
+.btn--submit {
   background-color: $checkout-btn-color;
   border-color: $checkout-btn-color;
   color: $font-color-secondary;

@@ -28,6 +28,7 @@ import { getRouterEventName, getInitialState } from './utils/utils';
 
     storeController.subscribeToStore('ADD_ITEM', handleCartQtyChange);
     storeController.subscribeToStore('REMOVE_ITEM', handleCartQtyChange);
+    storeController.subscribeToStore('CHECKOUT', handleCartQtyChange);
   }
 
   //main section

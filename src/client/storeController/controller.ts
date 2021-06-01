@@ -154,6 +154,11 @@ class StoreController {
     }
   }
 
+  checkout() {
+    const oldState = this.store.getState();
+    this.store.setState('CHECKOUT', { ...oldState, shoppingCart: [] });
+  }
+
   viewCart() {
     return this.store.getState().shoppingCart.slice();
   }
