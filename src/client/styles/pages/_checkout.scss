@@ -19,4 +19,16 @@
     max-width: 800px;
     padding: $space-med;
   }
+
+  &__success {
+    width: 90%;
+    padding: 1rem;
+    border-radius: $card-border-radius;
+    background-color: #4ac06d;
+    color: #0e5022;
+
+    a {
+      color: inherit;
+    }
+  }
 }

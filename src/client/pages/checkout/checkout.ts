@@ -1,10 +1,14 @@
-import { View, ValidatorOptions } from '@/types';
+import StoreController from '@/storeController/controller';
+import { View } from '@/types';
 import formField, { validator } from '@/components/formField/formField';
 
 class Checkout implements View {
   checkout: HTMLElement;
+  controller: StoreController;
 
-  constructor() {
+  unsubscribe: Array<() => void> = [];
+
+  constructor(controller: StoreController) {
     this.checkout = document.createElement('div');
     this.checkout.classList.add('checkout');
 
@@ -14,6 +18,16 @@ class Checkout implements View {
     this.checkout.appendChild(title);
 
     this.checkout.appendChild(this.buildForm());
+    this.checkout.appendChild(this.buildCheckoutSuccess());
+
+    this.controller = controller;
+
+    this.unsubscribe.push(
+      this.controller.subscribeToStore(
+        'CHECKOUT',
+        this.handleCheckout.bind(this)
+      )
+    );
   }
 
   render() {
@@ -25,7 +39,7 @@ class Checkout implements View {
   }
 
   unmount() {
-    //
+    this.unsubscribe.forEach((unsub) => unsub());
   }
 
   buildForm(): HTMLFormElement {
@@ -162,12 +176,33 @@ class Checkout implements View {
       ).success;
 
       if (fnSuccess && lnSuccess && addSuccess && emSuccess && pnSuccess) {
-        //submit
-        console.log('submitted');
+        //simulate checkout
+        this.controller.checkout();
       }
     });
 
     return form;
+  }
+
+  buildCheckoutSuccess(): HTMLElement {
+    const success = document.createElement('div');
+    success.classList.add('checkout__success');
+    success.classList.add('hidden');
+
+    success.innerHTML = `
+    <h3>Checkout Successful!</h3>
+    <a href='/'>Continue Shopping</a>
+    `;
+
+    return success;
+  }
+
+  handleCheckout() {
+    const form = this.checkout.querySelector('.checkout__form');
+    const success = this.checkout.querySelector('.checkout__success');
+
+    form?.classList.add('hidden');
+    success?.classList.remove('hidden');
   }
 }
 

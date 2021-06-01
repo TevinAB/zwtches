@@ -7,7 +7,8 @@ export type EventTypes =
   | 'GET_FEATURED_ITEMS'
   | 'GET_FEATURED_ITEMS_ERROR'
   | 'GET_SELECTED_PRODUCT'
-  | 'GET_SELECTED_PRODUCT_ERROR';
+  | 'GET_SELECTED_PRODUCT_ERROR'
+  | 'CHECKOUT';
 
 //All pages must implement this interface
 export interface View {
