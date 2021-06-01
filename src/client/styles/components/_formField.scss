@@ -1,0 +1,33 @@
+.form-field {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: $space-small;
+
+    & > * {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__label {
+    font-size: 0.87rem;
+  }
+
+  &__input {
+    padding: 0.5rem 0.8rem;
+  }
+
+  &__error {
+    font-size: 0.87rem;
+    color: red;
+  }
+}
+
+.success {
+  border: 2px #188038 solid;
+}
+
+.error {
+  border: 2px red solid;
+}

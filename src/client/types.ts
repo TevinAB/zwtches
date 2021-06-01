@@ -68,3 +68,10 @@ export interface State {
   //the product the user sees info about on the product desc page
   selectedProduct: ProductItem | null;
 }
+
+export interface ValidatorOptions {
+  noSpace?: boolean;
+  noNumbers?: boolean;
+  email?: boolean;
+  minLength?: number;
+}
