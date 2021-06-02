@@ -53,6 +53,7 @@ class Catalog implements View {
 
   private handleGetProducts(state: State) {
     this.catalogPage.innerHTML = `
+      <h2>${this.category}'s watches</h2>
       <ul class="catalog__list">
         ${state.products.items
           .map(
