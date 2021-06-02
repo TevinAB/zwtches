@@ -8,7 +8,8 @@
     "server": "nodemon --exec node --loader ts-node/esm -r dotenv/config src/server/index.ts",
     "client": "webpack serve --config ./config/webpack.dev.js",
     "start": "node --loader ts-node/esm -r dotenv/config src/server/index.ts",
-    "test": "jest --config config/jest.config.js"
+    "test": "jest --config config/jest.config.js",
+    "cypress:open": "npx cypress open"
   },
   "repository": {
     "type": "git",
