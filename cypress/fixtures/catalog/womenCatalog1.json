@@ -1,0 +1,28 @@
+{
+  "result": {
+    "items": [
+        {
+            "id": "prod_kd6Ll22pjlV2mj",
+            "created": 1621451472,
+            "updated": 1621451472,
+            "active": true,
+            "permalink": "fH3Wch",
+            "name": "Anne Klein Women's Bracelet Watch",
+            "description": "<ul><li><p>Silver-tone watch featuring ribbed outer dial with applied Roman numeral indices and brushed inner dial with short hands and logo </p></li><li><p>30-millimeter metal case with mineral dial window </p></li><li><p>Japanese quartz movement with analog display </p></li><li><p>Alloy bracelet with jewelry clasp closure </p></li><li><p>Water resistant to 30 meter (99 feet): In general, withstands splashes or brief immersion in water, but not suitable for swimming</p></li></ul>",
+            "price": {
+                "raw": 26,
+                "formatted": "26.00",
+                "formatted_with_symbol": "$26.00",
+                "formatted_with_code": "26.00 USD"
+            },
+            "media": {
+                "type": "image",
+                "source": "https://cdn.chec.io/merchants/26320/assets/m9g9vwfIEbyeMAtp|Anne Klein Women's Bracelet Watch.jpg"
+            }
+        }
+      ],
+      "meta": {
+        "lastPage": 2
+      }
+    }
+}
