@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import './styles/main.scss';
 import Store from '@/store/store';
 import StoreController from '@/storeController/controller';

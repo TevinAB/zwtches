@@ -1,26 +1,17 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/client/index.ts',
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../', 'dist'),
     clean: true,
     publicPath: '/',
-  },
-  devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './dist',
-    open: true,
-    port: 3000,
-    historyApiFallback: true,
-    hot: true,
-    proxy: {
-      '/api': 'http://localhost:5000',
-    },
   },
   resolve: {
     extensions: ['.ts', '...'],
@@ -33,13 +24,8 @@ module.exports = {
       {
         test: /\.(scss|css)$/i,
         use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
+          MiniCssExtractPlugin.loader,
+          'css-loader',
           {
             loader: 'postcss-loader',
             options: {
@@ -48,12 +34,7 @@ module.exports = {
               },
             },
           },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
+          'sass-loader',
         ],
       },
       {
@@ -68,10 +49,14 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
     new HtmlWebpackPlugin({
-      title: 'DevMode',
+      title: 'Zwtches',
       template: './public/template.html',
     }),
+    new CleanWebpackPlugin(),
   ],
+  optimization: {
+    minimizer: [new CssMinimizerPlugin(), '...'],
+  },
 };
